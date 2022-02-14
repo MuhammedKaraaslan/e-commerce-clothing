@@ -1,5 +1,5 @@
 import React from 'react'
-import Directory from '../components/directory/Directory'
+import Directory from '../../components/directory/Directory'
 import './HomePage.styles.scss'
 
 export default function HomePage() {
@@ -9,3 +9,4 @@ export default function HomePage() {
     </div>
   )
 }
+ 

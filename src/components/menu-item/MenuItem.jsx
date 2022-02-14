@@ -12,3 +12,4 @@ export default function MenuItem({ title, imageUrl, size }) {
         </div>
     )
 }
+ 
