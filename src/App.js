@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import Header from './components/header/Header';
 import HomePage from './pages/homepage/HomePage.jsx';
@@ -40,16 +40,20 @@ class App extends React.Component {
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route exact path='/shop' component={ShopPage} />
-          <Route exact path='/sign' component={Sign} />
+          <Route exact path='/sign' render={() => this.props.currentUser ? (<Redirect to='/' />) : (<Sign />)} />
         </Switch>
       </div >
     );
   }
 }
 
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser
+})
+
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 })
 
-//The first argumant(null) of the connect is state. It is null because App doesn't need any props from reducer like currentUser.
-export default connect(null, mapDispatchToProps)(App);
+//The first argumant(mapStateToProps) is to get current user and the second argumant is to dispatch. 
+export default connect(mapStateToProps, mapDispatchToProps)(App);
